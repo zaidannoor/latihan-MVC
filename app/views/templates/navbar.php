@@ -10,7 +10,7 @@
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
           <?php if(isset($_SESSION["role"]) && $_SESSION["role"] == "admin"):?>
-            <a class="nav-item nav-link" href="input_produk.php">Tambah produk</a>
+            <a class="nav-item nav-link" href="<?php BASEURL; ?>produk/input">Tambah produk</a>
           <?php endif; ?>
         </div>
         <div class="navbar-nav ms-auto">

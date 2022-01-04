@@ -1,6 +1,6 @@
 <?php 
 
-define('BASEURL', 'http://localhost/Belajar-php/Latihan-MVC/public/');
+define('BASEURL', 'http://localhost/latihan-MVC/public/');
 
 // konstanta untuk data base
 define('DB_HOST', 'localhost');

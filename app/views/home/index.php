@@ -10,7 +10,10 @@
 
 <section class="py-5">
 		<div class="container px-4 px-lg-5 mt-5">
+			
 			<h1>List Produk</h1>
+			<?php flasher::flash();echo 'Hello'; ?>
+
 			<!-- menampilkan isi dari database ke dalam bentuk card -->
 			<div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
 			<?php foreach ($data['produk'] as $produk) : ?>
@@ -18,8 +21,8 @@
           			<div class="card h-100">		
           				<?php if(isset($_SESSION["role"])) : // pengecekan role ?>
           					<?php if($_SESSION["role"] == "admin") : ?>
-          						<div class="badge bg-warning position-absolute" style="top: 0.5rem; left: 0.5rem"><a href="update.php?id=<?php echo($produk["id"]); ?>" class="text-dark">Update</a></div>
-          						<div class="badge bg-danger position-absolute" style="top: 2rem; left: 0.5rem"><a href="delete.php?id=<?php echo($produk["id"]); ?>" class="text-dark" onclick="return confirm('Apakah anda yakin ingin menghapus ?')">	Delete</a></div>
+          						<div class="badge bg-warning position-absolute" style="top: 0.5rem; left: 0.5rem"><a href="<?= BASEURL . 'produk/update/' . $produk['id'] ?>" class="text-dark">Update</a></div>
+          						<div class="badge bg-danger position-absolute" style="top: 2rem; left: 0.5rem"><a href="<?= BASEURL . 'produk/delete/' . $produk['id'] ?>" class="text-dark" onclick="return confirm('Apakah anda yakin ingin menghapus ?')">	Delete</a></div>
           					<?php endif; ?>
           				<?php endif; ?>
 
