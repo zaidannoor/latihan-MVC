@@ -1,3 +1,4 @@
+
 <header class="bg-secondary py-5">
 		<div class="container mx-auto my-5">
 			<div class="text-center text-white">
@@ -8,12 +9,13 @@
 
 	<section>
         <div class="container py-3 px-3">
-            <form method="post" enctype="multipart/form-data">
-            	<input type="hidden" name="imageLama" value="<?php echo($data["image_path"]) ?>">
-            	<input type="hidden" name="descriptionLama" value="<?php echo($data["description"]) ?>">
+            <form method="post" enctype="multipart/form-data" action="<?= BASEURL; ?>produk/updateData">
+                <input type="hidden" name="id" value="<?php echo($data["produk"]["id"]) ?>">
+            	<input type="hidden" name="imageLama" value="<?php echo($data["produk"]["image_path"]) ?>">
+            	<input type="hidden" name="descriptionLama" value="<?php echo($data["produk"]["description"]) ?>">
                 <div class="form-group mb-3">
                     <label for="name">Nama Produk</label>
-                    <input type="text" class="form-control" name="name" id="name" placeholder="nama produk" required="" value="<?php echo($data["name"]) ?>">
+                    <input type="text" class="form-control" name="name" id="name" placeholder="nama produk" required="" value="<?php echo($data["produk"]["name"]) ?>">
                 </div>
                 <div class="form-group mb-3">
                     <label for="description">Deskripsi</label>
@@ -21,15 +23,15 @@
                 </div>
                 <div class="form-group mb-3">
                     <label for="price">Harga</label>
-                    <input type="text" class="form-control" name="price" id="price" placeholder="harga produk(rupiah)" required="" value="<?php echo($data["price"]) ?>">
+                    <input type="text" class="form-control" name="price" id="price" placeholder="harga produk(rupiah)" required="" value="<?php echo($data["produk"]["price"]) ?>">
                 </div>
                 <div class="form-group mb-3">
                     <label for="stock">Stok</label>
-                    <input type="text" class="form-control" name="stock" id="stock" placeholder="stok barang" required="" value="<?php echo($data["stock"]) ?>">
+                    <input type="text" class="form-control" name="stock" id="stock" placeholder="stok barang" required="" value="<?php echo($data["produk"]["stock"]) ?>">
                 </div>
                 <div class="custom-file mb-3">
-                    <input type="file" class="custom-file-input" name="image" id="image">
-                    <label class="custom-file-label" for="image">Choose File</label>
+                    <label for="image" class="form-label">Gambar</label>
+                    <input class="form-control" type="file" name="image" id="image">
                 </div>
                 <div class="container">
                     <button type="submit" class="btn btn-dark" name="submit" style="width: 20%;">Submit</button>

@@ -14,6 +14,12 @@ class produk_model extends Controller{
 		return $this->db->resultSet();
 	}
 
+	public function getProductByID($id){
+		$this->db->query("SELECT * FROM product WHERE id=:id");
+		$this->db->bind('id' , $id);
+		return $this->db->single();
+	}
+
 	public function uploadImage(){
 		$namaFile = $_FILES["image"]["name"];
 		$ukuranFile = $_FILES["image"]["size"];
@@ -67,7 +73,7 @@ class produk_model extends Controller{
 		return $image_path;
 	}
 
-	public function inputProdukToDatabase($data){
+	public function inputProductToDatabase($data){
 		// ambil data dari inputan user
 		$name = htmlspecialchars($data["name"]);
 		$description = htmlspecialchars($data["description"]);
@@ -82,7 +88,7 @@ class produk_model extends Controller{
 		}
 
 		$query = "INSERT INTO product
-					VALUES ('' , :name , :description , :price , :stock , :image_path' , :waktu , :waktu:)";
+					VALUES ('' , :name , :description , :price , :stock , :image_path , :waktu , :waktu)";
 
 		$this->db->query($query);
 		$this->db->bind('name' , $name);
@@ -92,8 +98,71 @@ class produk_model extends Controller{
 		$this->db->bind('image_path' , $image_path);
 		$this->db->bind('waktu' , $waktu);
 		$this->db->execute();
+		
+		return $this->db->affectedRows();
+		
+	}
+
+	public function deleteProduct($id){
+		$query = "DELETE FROM product WHERE id=:id";
+		$this->db->query($query);
+		$this->db->bind('id' , $id);
+		$this->db->execute();
 
 		return $this->db->affectedRows();
+	}
+
+	public function updateProduct($data){
+		$id = $data["id"];
+		$name = htmlspecialchars($data["name"]);
+		$price = htmlspecialchars($data["price"]);
+		$stock = htmlspecialchars($data["stock"]);
+		date_default_timezone_set('Asia/Jakarta');
+		$waktu = date('Y-m-d H:i:s');
+		$errorFile = $_FILES["image"]["error"];
+		$imageLama = $data["imageLama"];
+
+		// pengecekan apakah deskripsi kosong atau tidak
+		if (htmlspecialchars($data["description"]) == '') {
+			// jika kosong pake, deskripsi yang lama
+			$description = $data["descriptionLama"];
+		}
+		else{
+			// kalo ada pake yang baru
+			$description = htmlspecialchars($data["description"]);
+		}
+
+		// pengecekan apakah image kosong atau tidak
+		if ($errorFile == 4) { // jika kosong, pakai image yang lama
+			$image_path = $imageLama;
+		}
+		else{ // jika ada, pakai image yang baru
+			$image_path = $this->uploadImage();
+		}
+
+		$query = "UPDATE product SET 
+					name=:name , description=:description, 
+					price=:price , stock=:stock , 
+					image_path=:image_path , updated_at=:waktu 
+					WHERE id=:id";
+
+		$this->db->query($query);
+		$this->db->bind('id' , $id);
+		$this->db->bind('name' , $name);
+		$this->db->bind('description' , $description);
+		$this->db->bind('price' , $price);
+		$this->db->bind('stock' , $stock);
+		$this->db->bind('image_path' , $image_path);
+		$this->db->bind('waktu' , $waktu);
+		$this->db->execute();
+
+		return $this->db->affectedRows();
+
+
+
+
+
+
 
 	}
 
