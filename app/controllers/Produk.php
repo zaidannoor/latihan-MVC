@@ -3,15 +3,11 @@
 
 class Produk extends Controller{
 	public function index(){
-		header('location: ' . BASEURL .'home');
-	}
-
-	public function input(){
 		$data['judul'] = 'input produk';
 		if (isset($_SESSION['login']) && $_SESSION['role'] == 'admin') {
 			$this->view('templates/header' , $data);
 			$this->view('templates/navbar');
-			$this->view('produk/input',$data);
+			$this->view('produk/index',$data);
 			$this->view('templates/copyright');
 			$this->view('templates/footer');
 		}
@@ -22,13 +18,16 @@ class Produk extends Controller{
 
 
 	public function inputProduk(){
-		
 			if ($this->model('produk_model')->inputProdukToDatabase($_POST) > 0) {
 				flasher::setFlash('Your Product' , ' has been added successfully' , 'success');
+				echo("Berhasil");
+				die();
 				header('location: ' . BASEURL .'home');
 			}
 			else{
 				flasher::setFlash('Your product' , 'failed to add' , 'danger');
+				echo('Gagal');
+				die();
 				header('location: ' . BASEURL .'home');
 			}
 		

@@ -8,7 +8,6 @@ class App{
 	public function __construct(){
 		
 		$url = $this->parseURL();
-		
 		// 1. mengambil controller dari url
 		// cek apakah controller yang dimasukkan di url ada di dalam file kita
 		// jika ada maka controller default akan ditimpa dengan yang di url

@@ -1,14 +1,13 @@
-<header class="bg-secondary py-5">
-		<div class="container mx-auto my-5">
-			<div class="text-center text-white">
-				<h1 class="display-4 fw-bolder">Input Produk</h1>
-			</div>
-		</div>
-	</header>
-
+    <header class="bg-secondary py-5">
+    	<div class="container mx-auto my-5">
+    		<div class="text-center text-white">
+    			<h1 class="display-4 fw-bolder">Input Produk</h1>
+    		</div>
+    	</div>
+    </header>
 	<section>
         <div class="container py-3 px-3">
-            <form method="POST" enctype="multipart/form-data" action="<?php BASEURL; ?>produk/inputProduk">
+            <form method="post" enctype="multipart/form-data" action="<?= BASEURL; ?>produk/inputproduk">
                 <div class="form-group mb-3">
                     <label for="name">Nama Produk</label>
                     <input type="text" class="form-control" name="name" id="name" placeholder="nama produk" required="">
@@ -31,6 +30,7 @@
                 </div>
                 <div class="mb-3">
                     <button type="submit" class="btn btn-dark" name="submit" style="width: 20%;">Submit</button>
+
                 </div>
                 
             </form>
