@@ -15,7 +15,7 @@
           <?php endif; ?>
         </div>
         <div class="navbar-nav ms-auto">
-          <a class="nav-item nav-link " href="cart.php"><img src="<?= BASEURL;  ?>img/cart.png" width="25px" height="25px"alt=""></a>
+          <a class="nav-item nav-link " href="<?= BASEURL;  ?>cart"><img src="<?= BASEURL;  ?>img/cart.png" width="25px" height="25px"alt=""></a>
           <?php if(isset($_SESSION["login"])): ?>
             <a class="nav-item nav-link " href="<?= BASEURL; ?>home/logout">Logout</a>
           <?php else : ?>

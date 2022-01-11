@@ -18,11 +18,11 @@
                 </div>
                 <div class="form-group mb-3">
                     <label for="price">Harga</label>
-                    <input type="text" class="form-control" name="price" id="price" placeholder="harga produk(rupiah)" required="">
+                    <input type="number" class="form-control" name="price" id="price" placeholder="harga produk(rupiah)" required="">
                 </div>
                 <div class="form-group mb-3">
                     <label for="stock">Stok</label>
-                    <input type="text" class="form-control" name="stock" id="stock" placeholder="stok barang" required="">
+                    <input type="number" class="form-control" name="stock" id="stock" placeholder="stok barang" required="">
                 </div>
                 <div class="mb-3">
 					<label for="image" class="form-label">Gambar</label>

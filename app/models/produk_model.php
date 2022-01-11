@@ -157,13 +157,70 @@ class produk_model extends Controller{
 		$this->db->execute();
 
 		return $this->db->affectedRows();
+	}
 
+	public function addToCart($data){
+		if ($data["hidden_stock"] == 0) {
+			// echo '<script>alert("Stock Habis")</script>';
+			// echo '<script>window.location="index.php"</script>';
+			return 0;
+		}
+		
+		if(isset($_SESSION["shopping_cart"])){
+			// mengambil data dengan index ['produk_id'] dari array session shopping_cart
+			$item_array_id = array_column($_SESSION["shopping_cart"], "produk_id");
+			if(!in_array($data["id"], $item_array_id))
+			{
+				$count = count($_SESSION["shopping_cart"]);
+				$item_array = array(
+					'produk_id'			=>	$data["id"],
+					'produk_name'		=>	$data["hidden_name"],
+					'produk_price'		=>	$data["hidden_price"],
+					'produk_quantity'	=>	$data["quantity"]
+				);
+				$_SESSION["shopping_cart"][$count] = $item_array;
+			}
+			else{
+				echo '<script>alert("Produk sudah ditambahkan")</script>';
+				return 0;
+			}
+		}
 
+		else{
+			$item_array = array(
+				'produk_id'			=>	$data["id"],
+				'produk_name'		=>	$data["hidden_name"],
+				'produk_price'		=>	$data["hidden_price"],
+				'produk_quantity'	=>	$data["quantity"]
+			);
+			$_SESSION["shopping_cart"][0] = $item_array;
+		}
 
+		return 1;
+			
+	}
 
+	public function deleteProductFromCart($id){
 
+		for ($i=0; $i < count($_SESSION['shopping_cart']); $i++) { 
+			if ($_SESSION['shopping_cart'][$i]['produk_id'] == $id) {
+				unset($_SESSION['shopping_cart'][$i]);
+				$this->adjust($i);
+				return 1;
+			}
+		}
 
+		return 0;
+	}
 
+	public function adjust($index){
+		$angka = count($_SESSION['shopping_cart']);
+		for ($j=$index; $j < $angka; $j++) { 
+			$_SESSION['shopping_cart'][$j] = $_SESSION['shopping_cart'][$j+1];
+		}
+		
+		unset($_SESSION['shopping_cart'][$angka]);
+		
 	}
 
 	

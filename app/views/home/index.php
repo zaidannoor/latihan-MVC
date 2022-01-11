@@ -38,10 +38,10 @@
             				</div>
             			</div>
             			<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-							<form action="cart.php" method="post" class="text-center">
+							<form action="<?= BASEURL;  ?>cart" method="post" class="text-center">
 								<label for="quantity">Jumlah</label>
 								<input type="hidden" name="id" value="<?php echo $produk["id"]; ?>" />
-								<input type="text" name="quantity" value="1" class="form-control mx-auto mb-2" style="width: 50px;" />
+								<input type="number" name="quantity" value="1" class="form-control mx-auto mb-2" style="width: 70px;" />
 								<input type="hidden" name="hidden_name" value="<?php echo $produk["name"]; ?>" />
 								<input type="hidden" name="hidden_price" value="<?php echo $produk["price"]; ?>" />
 								<input type="hidden" name="hidden_stock" value="<?php echo $produk["stock"]; ?>" />
